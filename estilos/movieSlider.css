@@ -1,0 +1,161 @@
+.itemMovie {
+    width: 200px;
+    height: 300px; /* Altura definida */
+    list-style-type: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Esto sigue funcionando para centrar el contenido */
+    z-index: 1;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50px;
+    box-shadow: 0 20px 30px rgba(255, 255, 255, 0.3) inset;
+    transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+  }
+  
+  .itemMovie:nth-child(1), .itemMovie:nth-child(2) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; /* Aseguramos que estos items tengan altura */
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+  
+  .itemMovie:nth-child(3) { left: 50%; }
+  .itemMovie:nth-child(4) { left: calc(50% + 170px); }
+  .itemMovie:nth-child(5) { left: calc(50% + 340px); }
+  .itemMovie:nth-child(6) { left: calc(50% + 550px); opacity: 0; }
+  
+  .contenidoMovie {
+    width: min(30vw, 400px);
+    position: relative;
+    top: 50%;
+    left: 3rem;
+    transform: translateY(-50%);
+    font: 400 0.85rem helvetica, sans-serif;
+    color: white;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    display: none;
+  }
+  
+  .tituloMovie {
+    font-family: 'Luckiest Guy';
+    text-transform: uppercase;
+  }
+  
+  .descripcionMovie {
+    line-height: 1;
+    margin: 1rem 0 1.5rem;
+    font-size: 1rem;
+    font-family: 'Luckiest Guy';
+  }
+  
+  .contenedorMovies button {
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    font-family: 'Luckiest Guy';
+  }
+  
+  .itemMovie:nth-of-type(2) .contenidoMovie {
+    display: block;
+    animation: show 0.75s ease-in-out 0.3s forwards;
+  }
+  
+  @keyframes show {
+    0% {
+      filter: blur(5px);
+      transform: translateY(calc(-50% + 75px));
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  
+  .contenedorMovies {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    position: relative; /* Esto es importante para que los items se posicionen dentro de este contenedor */
+    height: 660px;
+  }
+  
+  .slider {
+    flex: 1; /* El slider ocupa todo el espacio disponible */
+  }
+  
+  .navegacionMovies {
+    position: relative; /* Posición relativa para la barra de navegación */
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: auto; /* Empuja la nav hacia el final */
+    padding-bottom: 2rem;
+    user-select: none;
+    z-index: 5;
+  }
+  
+  .contenedorMovies .btn {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(0, 0, 0, 0.6);
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .contenedorMovies .btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+    
+      @media (width > 1080px) and (width < 1520px) {
+        .contenedorMovies .tituloMovie { font-size: 1rem; }
+        .contenedorMovies .descripcionMovie { font-size: 0.7rem; }
+        .contenedorMovies button { font-size: 0.7rem; }
+        .itemMovie {
+          width: 160px;
+          height: 270px;
+        }
+        .itemMovie:nth-child(3) { left: 52%; }
+        .itemMovie:nth-child(4) { left: calc(50% + 150px); }
+        .itemMovie:nth-child(5) { left: calc(50% + 260px); }
+        .itemMovie:nth-child(6) { display: none; }
+      }
+    
+      @media (width < 1081px) {
+        .contenedorMovies .tituloMovie { font-size: 0.9rem; }
+        .contenedorMovies .descripcionMovie { font-size: 0.65rem; }
+        .contenedorMovies button { font-size: 0.7rem; }
+        .itemMovie {
+          width: 130px;
+          height: 220px;
+        }
+        .itemMovie:nth-child(3) { left: 58%; }
+        .itemMovie:nth-child(4) { left: calc(50% + 240px); }
+        .itemMovie:nth-child(5) { display: none; }
+        .itemMovie:nth-child(6) { display: none; }
+      }
+
+      @media (width < 781px) {
+        .contenedorMovies .tituloMovie { font-size: 0.9rem; }
+        .contenedorMovies .descripcionMovie { font-size: 0.65rem; }
+        .contenedorMovies button { font-size: 0.7rem; }
+        .itemMovie {
+          width: 130px;
+          height: 220px;
+        }
+        .itemMovie:nth-child(3) { display: none; }
+        .itemMovie:nth-child(4) { display: none; }
+        .itemMovie:nth-child(5) { display: none; }
+        .itemMovie:nth-child(6) { display: none; }
+      }

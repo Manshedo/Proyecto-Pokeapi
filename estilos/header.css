@@ -1,0 +1,62 @@
+
+/* Estilos generales */
+.header {
+    padding: 20px;
+    background-image: url('https://wallpaperaccess.com/full/3551101.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    height: 250px; /* Ajuste inicial para pantallas pequeñas */
+  }
+  
+  .logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .headerButtons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'Luckiest Guy';
+    padding-bottom: 10px;
+  }
+  
+  /* Estilo para los botones */
+  .headerButtons button {
+    background-color: #3FB8AF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 25px;
+    margin: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    font-family: 'Luckiest Guy';
+  }
+  
+  /* Efecto hover */
+  .headerButtons button:hover {
+    background-color: rgba(63, 184, 175, 0.7);
+  }
+  
+  /* Media Query para pantallas grandes */
+  @media (min-width: 1024px) {
+    .header {
+        height: 200px; /* Reducir altura en pantallas grandes */
+    }
+  
+    .headerButtons {
+        margin-top: 5px; /* Menor espacio entre el logo y los botones */
+    }
+  
+    .headerButtons button {
+        padding: 12px 20px; /* Reducir tamaño de los botones */
+        margin: 5px 15px; /* Reducir margen entre los botones */
+        font-size: 16px; /* Ajustar el tamaño de la fuente */
+    }
+  }

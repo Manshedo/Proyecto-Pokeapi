@@ -1,0 +1,76 @@
+      
+      #ContainerElementsButtons {
+        display: flex;
+        flex-wrap: wrap;  /* Los botones se envolverán en filas */
+        gap: 11px;  /* Espacio entre los botones */
+        justify-content: center;
+        width: 100%;
+      }
+      .typeElement {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      .btnElement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        height: 31px;
+        padding: 10px;
+        font-size: 21px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 25px;
+        cursor: pointer;
+        border: 3px solid;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        background-origin: border-box;
+        transition: background-color 0.3s, color 0.3s;
+        box-sizing: border-box;
+      }
+  
+      .btnFont {
+        font-family: "Luckiest Guy", cursive;
+        font-weight: 400;
+        font-style: bold;
+        font-size: 15px;
+      }
+  
+      .imgElement {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+  
+      /* Colores para cada tipo */
+      .bug { background-color: #3b9950; border-color: #204a25; }
+      .dark { background-color: #5a5979; border-color: #040706; }
+      .dragon { background-color: #61cad9; border-color: #458a95; }
+      .electric { background-color: #fbfb72; border-color: #e3e32b; }
+      .fairy { background-color: #ea1369; border-color: #951a44; }
+      .fighting { background-color: #ed6238; border-color: #9a3f25; }
+      .fire { background-color: #fd4c5a; border-color: #a62127; }
+      .flying { background-color: #93b2c7; border-color: #49687b; }
+      .ghost { background-color: #906790; border-color: #33336a; }
+      .grass { background-color: #27cb4f; border-color: #147b3d; }
+      .ground { background-color: #6e491f; border-color: #b89b50; }
+      .ice { background-color: #d8f0fa; border-color: #86cff3; }
+      .normal { background-color: #ca98a7; border-color: #73525b; }
+      .poison { background-color: #9b69d9; border-color: #5e2d88; }
+      .psychic { background-color: #f81c91; border-color: #a22b6a; }
+      .rock { background-color: #8b3e21; border-color: #48180b; }
+      .steel { background-color: #44bd94; border-color: #5f756d; }
+      .water { background-color: #86a8fc; border-color: #1453df; }
+  
+      @keyframes expandContract {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+  
+      .activeElement {
+        animation: expandContract 1s ease-in-out infinite;
+      }

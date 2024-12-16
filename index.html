@@ -4,76 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Gallery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/index.css">
+    <link rel="stylesheet" href="estilos/header.css">
+    <link rel="stylesheet" href="estilos/buttonElements.css">
+    <link rel="stylesheet" href="estilos/movieSlider.css">
+    <link rel="stylesheet" href="estilos/pagination.css">
+    <link rel="stylesheet" href="estilos/pokemonGallery.css">
+    <link rel="stylesheet" href="estilos/loader.css">
+    <link rel="stylesheet" href="estilos/modal.css">
 </head>
+
 <body>
     <div class="header">
         <img src="https://assets.pokemon.com/assets/cms2-es-xl/img/misc/gus/buttons/logo-pokemon-79x45.png" alt="Logo Pokémon" class="logo">
-        <div class="button-container">
-            <button id="pokedex-button">Pokédex</button>
-            <button id="peliculas-button">Películas</button>
-            <button id="juegos-button">Juegos</button>
+        <div class="headerButtons">
+            <button id="btnMenuPokedex">Pokédex</button>
+            <button id="btnMenuMovie">Películas</button>
+            <button id="btnMenuGames">Juegos</button>
         </div>
     </div>
 
-    <div class="search-container">
+    <div class="pokedexHeader">
         <img src="https://th.bing.com/th/id/OIP.bx_URiXFLM1pPKTjmyPMnwAAAA?rs=1&pid=ImgDetMain" alt="Logo Pokédex" class="pokedex-logo">
-        <div class="search-and-button">
-            <input type="text" placeholder="Buscar Pokémon..." />
-            <button class="cargar-button" onclick="cargar()">Cargar más</button>
-        </div>
+        <div class="header-right">
+          <ul class="pagination" id="pagination"></ul>
+          <div class="search-and-button ">
+            <p>Buscar :</p>
+            <input id="btnSearch" type="text" placeholder="Nombre de Pokemon..." />
+          </div>
+          </div>
     </div>
 
-    <div class="pokemon-gallery">
+    <div class="pokemonGallery">
         <div class="filters">
             <h2>Filtros</h2>
-            <!-- Añade más elementos de filtro según sea necesario -->
+            <h3>Filtrar medidas</h3>
+              <div style="margin: 38px 16px 37px 9px;text-align: center;">            
+                  <div id="weight-slider"></div>
+                  <p>Peso: <span id="weight-range"></span> kg</p>
+                  <br>
+                  <div id="height-slider"></div>
+                  <p>Altura: <span id="height-range"></span> m</p>
+              </div>
+              <h3>Filtrar por tipo</h3>
+            <div id="ContainerElementsButtons"></div>
         </div>
-        <div id="primerComponente" class="pokemon-grid">
-            <!-- Aquí irán los Pokémon -->
+        <div id="pokemonListContainer" class="pokemonGrid">
+          
+          
         </div>
+        
     </div>
-    <div class="peliculas-container" id="peliculas">
-        <h2>Películas</h2>
-        <h3 style="font-size: 36px; color: #ff0000;">Muy pronto disponible</h3>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
+
+    <div id="preloader">
+      <div class="loader">Cargando...</div>
+      <div class="progress-container">
+          <div id="progressBar" class="progress-bar"></div>
+      </div>
     </div>
     
-    <div class="juegos-container" id="juegos">
-        <h2>Juegos</h2>
-        <h3 style="font-size: 36px; color: #ff0000;">Muy pronto disponible</h3>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
-        <p>Muy pronto disponible Muy pronto disponible Muy pronto disponible Muy pronto disponible</p>
+    <div id="modalContainer" class="modalContainer">
+      <div class="modalContent">
+              <div class="modalImageContainer">
+                <img id="modalImage" src="https://via.placeholder.com/250x250/ff7f7f/333333?text=Imagen+1" alt="Imagen">
+            </div>
+              <div class="modalPokemonDetails">
+                <p id="modalPokemonName"></p> 
+                <p id="modalPokemonId"></p>
+                <!-- <img id="modalImgType" src="https://via.placeholder.com/250x250/ff7f7f/333333?text=Imagen+1" alt="Imagen"> -->
+                <p id="modalPokemonDescription" class="modalPokemonDescription"></p> 
+                <button id="modalImageButton">Botón de acción</button>
+            </div>
+            <div class="modalPagination" id="modalPagination"></div>
+          <!-- Contenedor del botón de cerrar -->
+          <div class="modalCloseContainer">
+              <span class="modalCloseBtn" id="closeModalBtn">&times;</span>
+          </div>
+      </div>
+  </div>    
 
+    <div class="movieContainer" id="peliculas">
+        <h1>Películas</h1>
+  <div class="contenedorMovies">
+    <ul class="sliderMovies">
+      <li class="itemMovie" style="background-image: url('https://static1.thegamerimages.com/wordpress/wp-content/uploads/2021/08/pokemon-2000-moltres.jpg')">
+        <div class="contenidoMovie">
+          <h2 class="tituloMovie">Pokémon 2000: El poder de uno</h2>
+          <p class="descripcionMovie"> Sigue a Ash y sus amigos mientras intentan detener a Lawrence III, quien busca controlar los tres Pokémon legendarios: Articuno, Zapdos y Moltres, para desatar un cataclismo. </p>
+          <button>Leer más</button>
+        </div>
+      </li>
+      <li class="itemMovie" style="background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/11/pokemon-3-movie-entei-molly.jpg')">
+        <div class="contenidoMovie">
+          <h2 class="tituloMovie">Pokémon 3: El hechizo de los Unown</h2>
+          <p class="descripcionMovie"> Sigue a Ash y sus amigos mientras intentan salvar a la ciudad de un caos provocado por los Unown, unos Pokémon misteriosos. La trama se centra en la niña Molly, quien, al ser influenciada por los Unown, busca traer de vuelta a su padre, creando un mundo alternativo. </p>
+          <button>Leer más</button>
+        </div>
+      </li>
+      <li class="itemMovie" style="background-image: url('https://static1.srcdn.com/wordpress/wp-content/uploads/2023/01/pokemon-the-first-movie-with-ash.jpg')">
+        <div class="contenidoMovie">
+          <h2 class="tituloMovie">Pokémon: Mewtwo vs. Mew</h2>
+          <p class="descripcionMovie"> Es una película donde Mewtwo, un Pokémon creado artificialmente, se enfrenta a Mew, su contrapartida ancestral. Ambos luchan por sus identidades mientras enfrentan dilemas sobre su existencia y propósito. </p>
+          <button>Leer más</button>
+        </div>
+      </li>
+      <li class="itemMovie" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNjg4NjE0MTgtNzIwOS00YmM2LTllODgtNGNiMzE3ZThlZDM0XkEyXkFqcGc@._V1_.jpg')">
+        <div class="contenidoMovie">
+          <h2 class="tituloMovie">Pokémon: Arceus y la Joya de la Vida</h2>
+          <p class="descripcionMovie"> Ash y sus amigos deben enfrentarse a Arceus, el creador del universo, que causa un caos temporal tras sentirse traicionado por Dialga, Palkia y Giratina. Juntos, deben restaurar el flujo del tiempo y salvar el mundo. </p>
+          <button>Leer más</button>
+        </div>
+      </li>
+      <li class="itemMovie" style="background-image: url('https://upload.wikimedia.org/wikipedia/it/thumb/5/56/Diancie_e_il_bozzolo_della_distruzione.png/1200px-Diancie_e_il_bozzolo_della_distruzione.png')">
+        <div class="contenidoMovie">
+          <h2 class="tituloMovie">Pokémon: Diancie y la Crisalida de la Destrucción</h2>
+          <p class="descripcionMovie"> Diancie, la Princesa de los Diamantes, debe salvar su reino de una inminente destrucción. Para ello, busca la legendaria "Crisálida de la Destrucción", que posee el poder de restaurar el equilibrio. Junto a Ash y sus amigos, enfrentan desafíos y luchan contra el malvado Yveltal, mientras Diancie descubre su verdadero poder y responsabilidad como líder. </p>
+          <button>Leer más</button>
+        </div>
+      </li>
+      <li class="itemMovie" style="background-image: url('https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/Shiny-Rayquaza-Hoopa-and-the-Clash-of-Ages.jpg')">
+        <div class="contenidoMovie">
+          <h2 class="tituloMovie">Pokémon: Hoopa y el Duelo Histórico</h2>
+          <p class="descripcionMovie"> Ash y sus amigos conocen a Hoopa, un Pokémon capaz de invocar a otros con anillos mágicos. Sin embargo, Hoopa desata caos al liberar poderosos Pokémon legendarios, y Ash debe detener el desorden antes de que sea demasiado tarde. </p>
+          <button>Leer más</button>
+        </div>
+      </li>
+    </ul>
+    <nav class="navegacionMovies">
+      <ion-icon class="btn anterior btnMoviePrev" name="arrow-back-outline"></ion-icon>
+      <ion-icon class="btn siguiente btnMovieNext" name="arrow-forward-outline"></ion-icon>
+    </nav>
+  </div>
+  
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        
+    </div>
+    
+    <div class="gameContainer" id="juegos">
+      <div>       
+         <h1>Juegos</h1>
+        <img src="https://cdn.alfabetajuega.com/alfabetajuega/2021/07/1366_2000.jpg">
+      </div>
+      <div>        
+        <h1>Que pokemon eres?</h1>
+        <div class="headerButtons">
+          <button id="btnPokemonRandom" class="headerButtons">Suerte !</button>
+        </div>
+        <div id="pokemonImageRandom"></div>
+        <div id="pokemonNameRandom"></div>
+      </div>
     </div>
 
-    <script src="index.js"></script>
+
+    <script type="module" src="main.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
 </body>
 </html>

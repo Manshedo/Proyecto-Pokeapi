@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal con Slider y Paginación Vertical</title>
+    <style>
+        /* Estilo general para el modal */
+        .modalContainer {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Contenido del modal */
+        .modalContent {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            width: 55%;
+            max-width: 764px;
+            height: 35%;
+            position: relative;
+        }
+
+        /* Contenedor del botón de cerrar */
+        .modalCloseContainer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+        }
+
+        /* Botón para cerrar el modal */
+        .modalCloseBtn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modalCloseBtn:hover,
+        .modalCloseBtn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Contenedor de la imagen */
+        .modalImageContainer {
+            text-align: left;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: -79px;
+            transition: transform 2s ease, opacity 2s ease;
+            opacity: 0;
+        }
+
+        .modalImageContainer img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Paginación en el lado derecho */
+        .modalPagination {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 20px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .modalPagination .modalPage {
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+            margin-bottom: 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .modalPagination .modalPage:hover {
+            background-color: #007bff;
+        }
+
+        .modalPagination .modalActivePage {
+            width: 10px;
+            height: 20px;
+            background-color: #007bff;
+            border-radius: 5px;
+            animation: growHeight 0.3s steps(5) forwards; /* Aplicamos la animación */
+        }
+
+        /* Definir la animación con pasos */
+            @keyframes growHeight {
+                0% {
+                    height: 12px;
+                }
+                20% {
+                    height: 14px;
+                }
+                40% {
+                    height: 16px;
+                }
+                60% {
+                    height: 18px;
+                }
+                100% {
+                    height: 20px;
+                }
+            }
+
+        /* Estilos para el nuevo div entre la imagen y la paginación */
+        .modalPokemonDetails {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 20px 0;
+            margin-left: -30px;
+            transition: transform 2s ease, opacity 2s ease;
+            opacity: 0;
+        }
+
+        .modalPokemonDetails p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .modalPokemonDetails button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modalPokemonDetails button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Botón para abrir el modal -->
+    <button id="openModalBtn">Abrir Modal</button>
+
+    <!-- El Modal -->
+    <div id="modalContainer" class="modalContainer">
+        <div class="modalContent">
+            <div class="modalImageContainer">
+                <img id="modalImage" src="https://via.placeholder.com/250x250/ff7f7f/333333?text=Imagen+1" alt="Imagen">
+            </div>
+
+            <!-- Nuevo div con texto y botón -->
+            <div class="modalPokemonDetails">
+                <p id="modalPokemonName">Texto explicativo sobre la imagen</p>
+                <button id="modalImageButton">Botón de acción</button>
+            </div>
+
+            <div class="modalPagination" id="modalPagination"></div>
+
+            <!-- Contenedor del botón de cerrar -->
+            <div class="modalCloseContainer">
+                <span class="modalCloseBtn" id="closeModalBtn">&times;</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obtener los elementos del DOM con nombres detallados
+        const modalContainer = document.getElementById('modalContainer');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalImage = document.getElementById('modalImage');
+        const modalPokemonName = document.getElementById('modalPokemonName');
+        const modalImageButton = document.getElementById('modalImageButton');
+        const modalPaginationElement = document.getElementById('modalPagination');
+
+        let slideIndex = 0;
+        const images = [
+            {
+                src: "https://via.placeholder.com/250x250/ff7f7f/333333?text=Imagen+1",
+                text: "Texto para la imagen 1",
+                buttonText: "Acción 1"
+            },
+            {
+                src: "https://via.placeholder.com/250x250/7f7fff/333333?text=Imagen+2",
+                text: "Texto para la imagen 2",
+                buttonText: "Acción 2"
+            },
+            {
+                src: "https://via.placeholder.com/250x250/7fff7f/333333?text=Imagen+3",
+                text: "Texto para la imagen 3",
+                buttonText: "Acción 3"
+            },
+            {
+                src: "https://via.placeholder.com/250x250/ff7f7f/333333?text=Imagen+4",
+                text: "Texto para la imagen 4",
+                buttonText: "Acción 4"
+            },
+            {
+                src: "https://via.placeholder.com/250x250/7f7fff/333333?text=Imagen+5",
+                text: "Texto para la imagen 5",
+                buttonText: "Acción 5"
+            },
+            {
+                src: "https://via.placeholder.com/250x250/7fff7f/333333?text=Imagen+6",
+                text: "Texto para la imagen 6",
+                buttonText: "Acción 6"
+            }
+        ];
+
+        // Mostrar el modal
+        openModalBtn.addEventListener('click', () => {
+            modalContainer.style.display = "block";
+            showPage(slideIndex); // Mostrar la primera imagen
+            generatePagination();
+        });
+
+        // Cerrar el modal
+        closeModalBtn.addEventListener('click', () => {
+            modalContainer.style.display = "none";
+        });
+
+        // Cerrar el modal si el usuario hace clic fuera del contenido del modal
+        window.addEventListener('click', (event) => {
+            if (event.target === modalContainer) {
+                modalContainer.style.display = "none";
+            }
+        });
+
+        // Mostrar la imagen, texto y botón correspondientes a la página actual
+        function showPage(page) {
+            console.log(page)
+            const modalPokemonData = images[page];
+            modalImage.src = modalPokemonData.src;
+            modalPokemonName.textContent = modalPokemonData.text;
+            modalImageButton.textContent = modalPokemonData.buttonText;
+
+            // Reiniciar y aplicar la animación de deslizamiento y desvanecimiento
+            const modalImageContainer = document.querySelector('.modalImageContainer');
+            const modalPokemonDetails = document.querySelector('.modalPokemonDetails');
+
+            // Eliminar la transición temporalmente
+            modalImageContainer.style.transition = "none";
+            modalPokemonDetails.style.transition = "none";
+
+            // Restablecer la opacidad y el desplazamiento
+            modalImageContainer.style.opacity = 0;
+            modalPokemonDetails.style.opacity = 0;
+            modalImageContainer.style.transform = "translateY(30%)";
+            modalPokemonDetails.style.transform = "translateY(30%)";
+
+            // Forzar un reflujo para reiniciar la animación
+            void modalImageContainer.offsetWidth;
+            void modalPokemonDetails.offsetWidth;
+
+            // Después de un pequeño retraso, aplicar la transición de deslizamiento y desvanecimiento
+            setTimeout(() => {
+                modalImageContainer.style.transition = "transform 2s ease, opacity 2s ease";
+                modalPokemonDetails.style.transition = "transform 2s ease, opacity 2s ease";
+                modalImageContainer.style.transform = "translateY(0)";
+                modalPokemonDetails.style.transform = "translateY(0)";
+                modalImageContainer.style.opacity = 1;
+                modalPokemonDetails.style.opacity = 1;
+            }, 50);
+        }
+
+        // Generar la paginación
+        function generatePagination() {
+            const pageCount = images.length;
+            modalPaginationElement.innerHTML = '';
+
+            for (let i = 0; i < pageCount; i++) {
+                const pageRect = document.createElement('div');
+                pageRect.classList.add('modalPage');
+                if (i === slideIndex) {
+                    pageRect.classList.add('modalActivePage');
+                }
+
+                pageRect.addEventListener('click', () => {
+                    slideIndex = i;
+                    showPage(slideIndex);
+                    generatePagination(); // Actualizar la paginación
+                });
+
+                modalPaginationElement.appendChild(pageRect);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

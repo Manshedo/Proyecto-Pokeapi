@@ -1,0 +1,105 @@
+
+.pokemonGallery {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* 1/4 para filtros y 3/4 para Pokémon */
+    gap: 16px; 
+    padding: 16px; 
+    align-items: start
+  }
+
+.pokemonGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px; 
+   
+  }
+  
+  .pokemonCard {
+    text-align: center;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.5s forwards;
+  
+  }
+ 
+ .pokemonCard:hover {
+    /*transform: scale(1.05);*/
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  .pokemonCard h1 {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #333;
+  }
+  
+  .pokemonCard img, .pokemonGrid img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pokemonCard img {
+    height: 200px;
+    
+  }
+  
+  .pokemonGrid img {
+    height: auto;
+    
+  }  
+  
+@media (max-width: 956px) {
+    .pokemonGallery {
+      grid-template-columns: 1fr; /* Solo una columna para que los filtros estén encima de la galería */
+      grid-template-rows: auto 1fr; /* Los filtros ocuparán solo el espacio necesario y el grid se expandirá para los Pokémon */
+    }
+    .pokemonGrid {
+      width: 100%; /* Asegura que la galería de Pokémon ocupe todo el ancho disponible */
+    }
+  }
+  
+
+@keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.8) rotate(-5deg); /* Comienza fuera de lugar, pequeño y rotado */
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(15px) scale(1.05) rotate(5deg); /* A mitad de camino, el Pokémon es un poco más grande y rotado */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(0); /* Al final, se establece en su tamaño y posición final */
+    }
+  }
+  
+  
+  /* Responsividad */
+  @media (max-width: 1764px) {
+    .pokemonGrid {
+      grid-template-columns: repeat(5, 1fr); /* 4 columnas en pantallas más pequeñas */
+    }
+  }
+  
+  @media (max-width: 1360px) {
+    .pokemonGrid {
+      grid-template-columns: repeat(4, 1fr); /* 3 columnas aún más pequeñas */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .pokemonGrid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas muy pequeñas */
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .pokemonGrid {
+      grid-template-columns: 1fr; /* Una sola columna en pantallas ultra pequeñas */
+    }
+  }

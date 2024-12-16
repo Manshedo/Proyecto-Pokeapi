@@ -1,0 +1,42 @@
+#preloader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-image: url('../imagenes/eveeLoader.jpg'); /* Añadir la URL de tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el área */
+    display: flex;
+    flex-direction: column;  /* Colocar los elementos de forma vertical */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .progress-container {
+    width: 14%; /* Cambié el 80% a 50% para hacer la barra más estrecha */
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 10px;  /* Separar la barra del texto */
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4caf50;
+    transition: width 0.1s ease-in-out; /* Suavizar la transición de la barra */
+  }
+  
+  .loader {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #ddd;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+  
+  

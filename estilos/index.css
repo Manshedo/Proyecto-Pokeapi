@@ -1,0 +1,145 @@
+
+/* Estilo general para la página */
+body {
+    font-family: 'Luckiest Guy';
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centra el texto y los elementos en el cuerpo */
+    overflow: hidden;
+}
+
+.movieContainer h1,
+.gameContainer h1 {
+    text-align: center; /* Centra el texto */
+    margin: 50px 0px 50px 0px; /* Espacio arriba y abajo */
+    color: #3FB8AF
+}
+
+.gameContainer {
+  display: flex; /* Usamos flexbox para alinear los divs de manera flexible */
+  justify-content: space-between; /* Coloca los elementos al extremo izquierdo y derecho */
+  align-items: flex-start; /* Alinea los elementos al principio de la altura */
+  padding: 0px 40px 40px 40px;
+  margin-bottom: 30px;
+
+}
+
+.gameContainer > div {
+  flex: 1; /* Ambos divs ocupan el mismo tamaño */
+  display: flex;
+  flex-direction: column; /* Para que los elementos dentro del div se apilen verticalmente */
+  align-items: center; /* Centra los contenidos dentro de los divs */
+}
+
+
+/* Estilo adicional para las imágenes (si es necesario ajustar el tamaño) */
+.gameContainer img {
+  max-width: 100%; /* Asegura que la imagen no desborde su contenedor */
+  height: auto;
+}
+
+.noUi-tooltip {
+  font-size: 14px;
+  padding: 5px;
+  background-color: #3fb8af;
+  color: white;
+  border-radius: 3px;
+  position: absolute;
+  top: -30px; /* Ajusta esta propiedad para acercar o alejar el tooltip de los controles deslizantes */
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 22px;
+  right: -10px;
+  top: -1px;
+  height: 15px;
+
+}
+
+.noUi-horizontal {
+  height: 14px;
+}
+
+.filters {
+  background-color: #e6e6e6; /* Color de fondo ligero para los filtros */
+  padding: 16px; /* Espacio interno para los filtros */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para los filtros */
+  margin-bottom: 16px; /* Espacio inferior para evitar superposición */
+  height: auto; /* Asegúrate de que el alto sea automático para ajustarse al contenido */
+  color: #333333;
+  text-align: justify
+}
+
+.pokedexHeader {
+  display: flex; /* Usar flexbox para alinear los elementos */
+  justify-content: space-between; /* Espacio entre la imagen y el contenedor de búsqueda */
+  align-items: center; /* Centrar verticalmente los elementos */
+  padding: 16px 16px 5px 16px;
+}
+
+.pokedex-logo {
+  width: 150px; /* Ajusta el tamaño según sea necesario */
+  height: auto; /* Mantiene la relación de aspecto */
+  margin-bottom: 10px;
+}
+
+/* Estilo para el contenedor de los elementos en la parte derecha */
+.header-right {
+  display: flex;
+  flex-direction: row; /* Por defecto, los elementos se alinean en fila */
+  gap: 16px;
+  align-items: center; /* Centra verticalmente los elementos */
+
+}
+
+/* Estilo para la búsqueda */
+.search-and-button {
+  display: flex; /* Usar flexbox para alinear el campo y el botón */
+  align-items: center; /* Centrar verticalmente */
+  gap: 16px;
+  color: #ffffff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.search-and-button input {
+  padding: 8px; /* Espaciado interno */
+  border: 2px solid #3fb8af; /* Borde con color verde */
+  border-radius: 25px; /* Bordes redondeados */
+  font-size: 15px; /* Tamaño de letra */
+}
+
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 1000px) {
+  /* Cambiar a columna solo en pantallas pequeñas */
+  .pokedexHeader {
+      flex-direction: column; /* Apilar los elementos en columna */
+      align-items: center; /* Centrar los elementos */
+      text-align: center; /* Centrar los elementos dentro del contenedor */
+  }
+
+  /* Cambiar dirección de los elementos dentro de .header-right */
+  .header-right {
+      flex-direction: column; /* Apilar verticalmente la paginación y la barra de búsqueda */
+      gap: 16px; /* Espacio entre los elementos */
+      align-items: flex-start; /* Centrar los elementos de la derecha */
+      width: 100%; /* Asegurarse de que ocupe todo el ancho disponible */
+  }
+
+  .search-and-button {
+    order: -1; /* El buscador va arriba (antes de la paginación) */
+  }
+
+  }
+
+  @media (max-width: 956px) {
+    .filters {
+      width: 95%; /* Asegura que los filtros ocupen todo el ancho disponible */
+      margin-bottom: 16px; /* Espacio inferior entre los filtros y las tarjetas de Pokémon */
+      
+    }
+  
+  }
+
+
